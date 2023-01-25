@@ -1,0 +1,35 @@
+1)
+
+
+select b.loan_number, c.customer_name from borrower b , loan l, customer c where  b.loan_number = l.loan_number and branch_name= 'Downtown' and b.customer_id =c.customer_id;
+
+2)
+ select  branch_name from branch where assets >some (select  assets from  branch where branch_city ='Horseneck') and branch_city!= 'Horseneck';
+
+3)
+select b.branch_name,count(distinct a.account_number) from (account a inner join depositor d on d.account_number= a.account_number) right join branch b on b.branch_name =a.branch_name group by  branch_name ;
+
+4)
+ select n1.customer_name as  Customer1, n2.customer_name as Customer2, n2.customer_city from customer as n2 inner join customer as n1 where n1.customer_name!= n2.customer_name and n1.customer_city= n2.customer_city group by  n2.customer_city;
+
+5)
+select branch_name, sum(balance*4)/100 as Total_Interest from account group by  branch_name;
+
+
+6)
+select a.account_number from  account a , branch b where  a.branch_name= b.branch_name and (branch_city, balance) in (select b.branch_city,max(balance) from account a, branch 
+b where a.branch_name= b.branch_name group by branch_city );
+
+7)
+select branch_name from branch where assets < all (select assets  from branch where branch_city = 'Brooklyn' ) and branch_city != 'Brooklyn';
+
+8 )
+select l.loan_number , l.amount as Loan_Amount ,c.customer_name from customer c, borrower b,loan l,  account a where c.customer_id=b.customer_id  and l.loan_number=b.loan_number and a.branch_name= l.branch_name  order by (l.amount) desc limit 5 ;
+
+
+9)
+select c.customer_name from  borrower b, loan l, customer c,depositor d,account a where b.loan_number =l.loan_number and l.branch_name =‘Perryridge’ and c.customer_id=b.customer_id and d.customer_id = c.customer_id and a.account_number =d.account_number;
+
+10)
+
+select sum(amount ) as totl_loan_amount from loan l, borrower b where l.loan_number= b.loan_number group by b.customer_id having count(*)>=2;

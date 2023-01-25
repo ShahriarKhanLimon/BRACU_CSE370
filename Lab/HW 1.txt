@@ -1,0 +1,45 @@
+before-
+mysql -u root -p
+
+create database CSE370_HW_1;
+
+use CSE370_HW_1;
+
+CREATE TABLE users(
+	member_id int,
+	name varchar(30),
+	email varchar (30),
+	influence_count long,
+	member_since date,
+	multiplier int
+);
+
+INSERT INTO users VALUES
+(1,'Taylor Otwell', 'otwell@laravel.com', 739360, '2020-6-10',10),
+(2,'Ryan Dahl','ryan@nodejs.org',633632,'2020-04-22',10),
+(3,'Brendan Eich','eich@javascript.com',939570,'2020-05-07',8),
+(5,'Evan You','you@vuejs.org',982630,'2020-06-11',7),
+(6,'Rasmus Lerdorf','lerdorf@php.net',937927,'2020-06-3',8),
+(7,'Guido van Rossum','guido@python.org',968827,'2020-07-18',19),
+(8,'Adrian Holovaty','adrian@djangoproject.com',570724,'2020-05-07',5),
+(9,'Simon Willison','simon@djangoproject.com',864615,'2020-04-30',4),
+(10,'James Gosling','james@java.com',719491,'2020-05-18',5),
+(11,'Rod Johnson','rod@spring.io',601744,'2020-05-18',7),
+(12,'Satoshi Nakamoto','nakamoto@blockchain.com',630488,'2020-05-10',10);
+
+describe cse370_hw_1;
+
+
+select * from users;
+
+
+1
+ALTER TABLE users CHANGE influence_count followers int(10);
+2
+ALTER TABLE users CHANGE member_since joining_date date;
+3
+SELECT name, email, followers FROM users;
+4
+SELECT name, ((followers*100/1000000)*(multiplier*100/20))/100 AS Efficiency FROM users;
+5
+ALTER TABLE users MODIFY COLUMN multiplier char(20);

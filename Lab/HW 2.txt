@@ -1,0 +1,102 @@
+before-
+
+mysql -u root -p
+
+create database CSE370_HW_1;
+
+use CSE370_HW_1;
+
+CREATE TABLE users(
+	member_id int,
+	name varchar(30),
+	email varchar (30),
+	influence_count long,
+	member_since date,
+	multiplier int
+);
+
+INSERT INTO users VALUES
+(1,'Taylor Otwell', 'otwell@laravel.com', 739360, '2020-6-10',10),
+(2,'Ryan Dahl','ryan@nodejs.org',633632,'2020-04-22',10),
+(3,'Brendan Eich','eich@javascript.com',939570,'2020-05-07',8),
+(5,'Evan You','you@vuejs.org',982630,'2020-06-11',7),
+(6,'Rasmus Lerdorf','lerdorf@php.net',937927,'2020-06-3',8),
+(7,'Guido van Rossum','guido@python.org',968827,'2020-07-18',19),
+(8,'Adrian Holovaty','adrian@djangoproject.com',570724,'2020-05-07',5),
+(9,'Simon Willison','simon@djangoproject.com',864615,'2020-04-30',4),
+(10,'James Gosling','james@java.com',719491,'2020-05-18',5),
+(11,'Rod Johnson','rod@spring.io',601744,'2020-05-18',7),
+(12,'Satoshi Nakamoto','nakamoto@blockchain.com',630488,'2020-05-10',10);
+
+describe cse370_hw_1;
+
+
+select * from users;
+
+//tasks given
+
+1. select distinct multiplier from users order by multiplier desc;
+
+2. select distinct member_since from users order by member_since asc;
+
+3. select member_id, email from users where email like '%com';
+
+4. select name, email from users order by member_since desc limit 5;
+
+5. select count(*) as users_total from users;
+
+6. select count(*) as users_no, multiplier from users where member_since > '2020-04-30' group by multiplier;
+
+7. select avg(length(name)) as avg_length_name from users;
+
+8. select count(distinct substring_index(email, ".", -1)) as unique_TLDs from users;
+
+9. select * from users order by member_since asc;
+
+10. select name, influence_count from users where influence_count=(select max(influence_count) where member_since > '2020-06-01');
+
+11. select name, multiplier from users where influence_count<700000 and multiplier=(select max(multiplier) from users where influence_count<700000);
+
+12.select distinct multiplier from users where influence_count<900000;
+
+13. select avg(influence_count) as avg_influence_count_aafter_11_June from users where member_since<'2020-06-11';
+
+14.select member_id, name, email, multiplier from users where influence_count between 700000 and 990000 and member_since > '2020-05-18';
+
+15.select member_id, name, email, influence_count from users where name like '%u%' and name like '%o%' and name like '%v%' and name like '%n%' and name like '%s%' and name like '%m%';
+
+
+
+
+
+
+//got
+1. select distinct multiplier from users order by multiplier DESC; // multiplier k int e convert kora hoyeche
+
+2. select distinct member_since from users order by member_since;
+
+3. select id, email from users where email like '%com';
+
+4. select name, email, member_since from users order by member_since DESC LIMIT 5; // asc order e dekhano lagbe na
+
+5. select COUNT(*) AS total_users from users;
+
+6. select COUNT(*) AS no_of_users, multiplier from users where member_since > '2020-04-30' GROUP by multiplier;
+
+7. select avg(length(name)) as avg_length_name from users;
+
+8. select count(distinct substring_index(email, ".", -1)) from users;
+
+9. select * from users order by member_since;
+
+10. select name, influence_count from users where influence_count= (select max(influence_count) from users where member_since > '2020-05-31'); // eta inner clause ta dile jei result ashe oitar justification
+
+11. select name, multiplier from users where influence_count < 700000 and multiplier= (select MAX(multiplier) from users where influence_count < 700000); // bakider shathe otwell kibhabe ashe?
+
+12. select distinct multiplier from users where influence_count < 900000;
+
+13. select AVG(influence_count) from users where member_since < '2020-06-11';
+
+14. select id, name, email, multiplier from users where influence_count BETWEEN 700000 and 990000 and member_since > '2020-05-18';
+
+15. select id, name, email, influence_count from users where name like '%u%' and name like'%o%' and name like'%v%' and name like'%n%' and name like '%s%' and name like '%m%';

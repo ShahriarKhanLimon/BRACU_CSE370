@@ -1,0 +1,82 @@
+before-
+
+mysql -u root -p
+
+create database cse370_hw_2;
+
+use cse370_hw_2;
+
+create table employees(
+	employee_id char(10),
+	first_name varchar(20),
+	last_name varchar(20),
+	email varchar(60),
+	phone_number char(14),
+	hire_date date,
+	job_id int,
+	salary int,
+	commission_pct decimal(5,3),
+	manager_id char(10),
+	department_id int
+);
+
+
+insert into employees values
+    ('1910144401','ahmad','zubair','zubairh@gmail.com','+88017678901234','2012-09-15',5,100000,15.456,'0000000056',7);
+
+
+insert into employees values
+    ('1910144402','shamim','mia','mia@gmail.com','+88017678904321','2012-10-15',8,150000,17.456,'0000000080',7),
+    ('1910144403','sharnit','saha','sharnit@gmail.com','+88018678904321','2011-11-17',8,300000,20.486,'0000000020',15),
+    ('1910144404','asif','alam','asif@gmail.com','+88017987604321','2013-10-15',2,200000,12.456,'0000000022',3),
+    ('1910144405','swapnil','none','swapnil@gmail.com','+88017978604321','2025-11-01',7,20000,8.912,'0000000099',3),
+    ('1910144406','abrar','salehin','abrar@gmail.com','+88017978604321','2011-10-15',6,200000,19.456,'0000000021',14);
+
+('1910144407','rahed','none','rashed@gmail.com','+88017978604321','2011-10-15',6,200000,19.456,'0000000021',14);
+
+
+describe cse370_hw_2;
+
+
+select * from employees;
+
+//tasks given
+
+1. select first_name, last_name, email, phone_number, hire_date, department_id from employees where (hire_date, department_id) in (select max(hire_date), department_id from employees group by department_id);
+
+2. select first_name, last_name, email, phone_number, hire_date, department_id from employees where (hire_date, department_id) in (select min(hire_date), department_id from employees group by department_id);
+
+3. select first_name, last_name, employee_id, phone_number, salary, department_id from employees where (department_id, salary) in (select department_id, min(salary) from employees group by department_id);
+
+4. select first_name, last_name, employee_id, commission_pct, department_id from employees where department_id=7 and commission_pct<all (select commission_pct from employees where department_id=5);
+
+5. select department_id, count(*) as total_employees from employees group by department_id;
+
+6. select first_name, last_name, employee_id, email, salary, department_id from employees where hire_date <'2020-01-01';
+
+7. select first_name, last_name, employee_id, email, salary, department_id from employees where salary=(select max(salary) from employees where manager_id= 'abcd998773');
+
+8. select distinct department_id from employees a1 where not exists (select * from employees a2 where a1.department_id= a2.department_id and a2.salary >30000);
+
+9. select department_id, job_id, commission_pct from employees a1 where exists (select * from employees a2 where a1.department_id= a2.department_id and a1.job_id !=a2.job_id and a1.commission_pct<a2.commission_pct) group by department_id; 
+
+10. select first_name, last_name, employee_id,email, salary, department_id, commission_pct from employees where (manager_id,commission_pct) in (select manager_id, min(commission_pct) from employees group by manager_id);
+
+11. select count(*) as number_of_employees from employees where employee_id=manager_id;
+
+12. select department_id, job_id,salary from employees a1 where exists (select * from employees a2 where a1.manager_id =a2.manager_id and a1.job_id !=a2.job_id and a1.salary< a2.salary) group by department_id;
+
+13. select manager_id from employees a1 where exists (select * from employees a2 where a1.manager_id= a2.manager_id and a1.salary >1500) group by manager_id; 
+
+14. select manager_id from employees a1 where exists (select * from employees a2 where a1.manager_id=a2.manager_id and a1.commission_pct<15.25) group by manager_id;
+
+15. select distinct manager_id from employees a1 where not exists (select * from employees a2 where a1.manager_id=a2.manager_id and a2.salary<3500);
+
+
+
+
+
+//got
+
+
+15. select id, name, email, influence_count from users where name like '%u%' and name like'%o%' and name like'%v%' and name like'%n%' and name like '%s%' and name like '%m%';
