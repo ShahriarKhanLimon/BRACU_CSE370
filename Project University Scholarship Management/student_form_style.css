@@ -1,0 +1,26 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box; 
+}
+
+form {
+    max-width: 80%;
+    margin: auto;
+    padding: 50px;
+    text-align: center;
+}
+
+input, textarea {
+    width: 80%;
+    margin: 13px 0px;
+    padding: 7px;
+    font-size: 15px;
+}
+
+.btn {
+    padding: 10px 70px;
+    background-color: rgb(68, 133, 255);
+    color: white;
+    border: 0px;
+}

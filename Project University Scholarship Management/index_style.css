@@ -1,0 +1,11 @@
+form {
+    margin-top: 20%;
+    margin-left: 1%;
+}
+
+.btn {
+    padding: 10px 68px;
+    background-color: rgb(68, 133, 255);
+    color: white;
+    border: 0px;
+}
